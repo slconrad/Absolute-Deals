@@ -13,25 +13,21 @@
         /* --- VARIABLES & RESET --- */
         :root {
             --primary-dark: #0f172a;   /* Slate 900 */
+            --secondary-dark: #1e293b; /* Slate 800 */
             --primary-blue: #3b82f6;   /* Blue 500 */
             --accent-cyan: #06b6d4;    /* Cyan 500 */
-            --glass-bg: rgba(15, 23, 42, 0.7);
-            --card-bg: rgba(30, 41, 59, 0.8);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --gradient-text: linear-gradient(45deg, #fff, #93c5fd);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
 
         body {
             background-color: var(--primary-dark);
             color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* --- HERO SECTION --- */
@@ -48,15 +44,10 @@
             overflow: hidden;
         }
 
-        /* The Canvas for the Vibration Effect */
         #vibration-canvas {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.6;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; opacity: 0.6;
         }
 
         .hero-content {
@@ -85,16 +76,12 @@
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 20px;
-            background: -webkit-linear-gradient(45deg, #fff, #93c5fd);
+            background: var(--gradient-text);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        p.subtitle {
-            font-size: 1.5rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-        }
+        p.subtitle { font-size: 1.5rem; color: var(--text-muted); margin-bottom: 40px; }
 
         .cta-button {
             background: white;
@@ -107,26 +94,20 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             text-decoration: none;
+            display: inline-block;
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-        }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2); }
 
         /* --- VALUE GRID SECTION --- */
         .value-section {
             padding: 80px 20px;
-            background: linear-gradient(to bottom, var(--primary-dark), #1e293b);
+            background: linear-gradient(to bottom, var(--primary-dark), var(--secondary-dark));
             position: relative;
             z-index: 2;
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-        }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
 
         .grid-container {
             display: grid;
@@ -137,7 +118,7 @@
         }
 
         .card {
-            background: var(--card-bg);
+            background: rgba(30, 41, 59, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 16px;
             padding: 40px;
@@ -146,42 +127,79 @@
             overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-blue);
+        .card:hover { transform: translateY(-10px); border-color: var(--primary-blue); }
+
+        .card-icon { font-size: 2rem; margin-bottom: 20px; color: var(--accent-cyan); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); }
+
+        /* --- NEW SECTION: INFORMATIONAL NARRATIVE (No Cards) --- */
+        .info-section {
+            padding: 100px 20px;
+            background-color: var(--primary-dark);
+            position: relative;
         }
 
-        /* A subtle glow effect on cards */
-        .card::before {
+        .info-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .info-header h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .info-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+        }
+
+        .market-fit-list {
+            list-style: none;
+            padding: 0;
+            border-left: 2px solid rgba(59, 130, 246, 0.3);
+            margin-top: 20px;
+        }
+
+        .market-fit-item {
+            padding-left: 40px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .market-fit-item::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--accent-cyan));
-            opacity: 0;
-            transition: opacity 0.3s;
+            left: -11px; /* Align with border */
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-dark);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            transition: background-color 0.3s;
         }
 
-        .card:hover::before {
-            opacity: 1;
+        .market-fit-item:hover::before {
+            background-color: var(--accent-cyan);
+            box-shadow: 0 0 15px var(--accent-cyan);
         }
 
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--accent-cyan);
+        .market-fit-item h3 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 10px;
         }
 
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .card p {
+        .market-fit-item p {
+            font-size: 1.1rem;
             color: var(--text-muted);
-            line-height: 1.6;
         }
 
         /* --- FOOTER --- */
@@ -202,6 +220,7 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
+            .info-header h2 { font-size: 2rem; }
             .hero { height: auto; min-height: 80vh; padding-top: 100px; }
         }
     </style>
@@ -221,44 +240,76 @@
     <section class="value-section">
         <h2 class="section-title">Why This Asset Holds Tremendous Value</h2>
         <div class="grid-container">
-            
+            <div class="card">
+                <div class="card-icon">👑</div>
+                <h3>Instant Authority</h3>
+                <p>"Absolute" implies finality, perfection, and totality. It creates an immediate perception of being the ultimate source.</p>
+            </div>
             <div class="card">
                 <div class="card-icon">🌐</div>
                 <h3>Brand Versatility</h3>
-                <p>Perfect for a massive E-commerce platform, a B2B liquidation firm, a daily coupon app, or a financial service aggregator. The name scales with any industry vertical.</p>
+                <p>Perfect for E-commerce, B2B liquidation, or daily coupons. The name scales with any industry vertical.</p>
             </div>
-
             <div class="card">
                 <div class="card-icon">🚀</div>
                 <h3>Search Dominance</h3>
-                <p>High-value keywords that are intuitive to type and impossible to forget. Reduce your customer acquisition costs with a name that users remember after seeing just once.</p>
+                <p>High-value keywords that are intuitive to type. Reduce customer acquisition costs with a memorable name.</p>
             </div>
-
             <div class="card">
                 <div class="card-icon">🛡️</div>
                 <h3>Built-in Trust</h3>
-                <p>Generic premium .com domains signal longevity and capital strength. Customers trust "AbsoluteDeals.com" over "Best-Deals-4u.net" before they even load the page.</p>
+                <p>Generic premium .com domains signal longevity. Customers trust "AbsoluteDeals.com" instinctively.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-container">
+            <div class="info-header">
+                <h2>The Architecture of a Market Leader</h2>
+                <p>A domain is more than an address; it defines your business model. "Absolute Deals" is specifically engineered for high-volume, trust-based commerce.</p>
             </div>
 
+            <ul class="market-fit-list">
+                <li class="market-fit-item">
+                    <h3>The General Merchandise Giant</h3>
+                    <p>
+                        This name supports a vast catalog—from electronics to home goods. Unlike niche names that limit expansion, "Absolute" allows you to sell everything. It positions the brand as a direct competitor to major general retailers, suggesting a complete inventory where the customer needs to look nowhere else.
+                    </p>
+                </li>
+
+                <li class="market-fit-item">
+                    <h3>The Direct-to-Consumer Discounter</h3>
+                    <p>
+                        In an economy where price sensitivity is key, this domain speaks directly to the value hunter. It is perfectly suited for a business model focused on liquidation, overstock, or factory-direct pricing. It promises the customer that the savings have been maximized and passed directly to them—the "Absolute" best price.
+                    </p>
+                </li>
+
+                <li class="market-fit-item">
+                    <h3>The Daily Deal Aggregator</h3>
+                    <p>
+                        For platforms that curate flash sales or limited-time offers, urgency is currency. This domain creates a psychological anchor of finality. When a user lands here, they aren't browsing for options; they are looking for the definitive deal of the day.
+                    </p>
+                </li>
+            </ul>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="mailto:inquire@absolutedeals.com?subject=Offer for AbsoluteDeals.com" class="cta-button" style="background: var(--accent-cyan); color: white;">Contact Broker</a>
+            </div>
         </div>
     </section>
 
     <footer>
         <p>&copy; 2024 Domain Holdings. All rights reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 10px;">This website is PWA ready.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">PWA Ready | Hosted on GitHub</p>
     </footer>
 
     <script>
-        /**
-         * 1. HERO VIBRATION ANIMATION
-         * Uses HTML5 Canvas to create a "vibrating" wave mesh effect
-         */
         const canvas = document.getElementById('vibration-canvas');
         const ctx = canvas.getContext('2d');
-
         let width, height;
         let lines = [];
-        const gap = 30; // Distance between lines
+        const gap = 30;
 
         function resize() {
             width = canvas.width = window.innerWidth;
@@ -279,11 +330,9 @@
         }
 
         function animate() {
-            ctx.fillStyle = '#0f172a'; // Background clear color
+            ctx.fillStyle = '#0f172a';
             ctx.fillRect(0, 0, width, height);
-
             ctx.lineWidth = 1;
-            // Create a gradient for the lines
             let gradient = ctx.createLinearGradient(0, 0, width, 0);
             gradient.addColorStop(0, 'rgba(59, 130, 246, 0)');
             gradient.addColorStop(0.5, 'rgba(6, 182, 212, 0.5)');
@@ -291,21 +340,16 @@
             ctx.strokeStyle = gradient;
 
             const time = Date.now() * 0.002;
-
             lines.forEach(line => {
                 ctx.beginPath();
                 for (let x = 0; x <= width; x += 20) {
-                    // The "Vibration" math: Sine wave + Noise
                     const y = line.y + Math.sin(x * 0.01 + time * line.speed + line.offset) * line.amplitude;
-                    // Add slight jitter for "vibration" feel
                     const jitter = (Math.random() - 0.5) * 2; 
-                    
                     if (x === 0) ctx.moveTo(x, y);
                     else ctx.lineTo(x, y + jitter);
                 }
                 ctx.stroke();
             });
-
             requestAnimationFrame(animate);
         }
 
@@ -313,13 +357,7 @@
         resize();
         animate();
 
-        /**
-         * 2. PWA SETUP (Single File Approach)
-         * Since we cannot serve external files easily in this format,
-         * we inject the Manifest via Data URI and register a dummy SW.
-         */
-        
-        // Generate Manifest dynamically
+        // PWA Manifest Injection
         const manifestData = {
             "name": "Absolute Deals",
             "short_name": "AbsoluteDeals",
@@ -329,37 +367,22 @@
             "theme_color": "#0f172a",
             "description": "Buy the premium domain AbsoluteDeals.com",
             "icons": [
-                {
-                    "src": "https://via.placeholder.com/192x192/3b82f6/ffffff?text=AD",
-                    "sizes": "192x192",
-                    "type": "image/png"
-                },
-                {
-                    "src": "https://via.placeholder.com/512x512/3b82f6/ffffff?text=AD",
-                    "sizes": "512x512",
-                    "type": "image/png"
-                }
+                { "src": "https://via.placeholder.com/192x192/3b82f6/ffffff?text=AD", "sizes": "192x192", "type": "image/png" },
+                { "src": "https://via.placeholder.com/512x512/3b82f6/ffffff?text=AD", "sizes": "512x512", "type": "image/png" }
             ]
         };
-
         const stringManifest = JSON.stringify(manifestData);
         const blobManifest = new Blob([stringManifest], {type: 'application/json'});
         const manifestURL = URL.createObjectURL(blobManifest);
         document.querySelector('#manifest-placeholder').setAttribute('href', manifestURL);
 
-        // Service Worker Registration
+        // Service Worker Registration for GitHub Pages
         if ('serviceWorker' in navigator) {
-            // NOTE: For a real PWA, you need a separate 'sw.js' file. 
-            // This code checks for it, but for a single-file demo, 
-            // the browser requires the SW to be served from the same origin script.
-            // We will attempt to register a no-op worker if available.
             window.addEventListener('load', () => {
-                // To make this fully functional, create a file named 'sw.js'
-                // with content: self.addEventListener('fetch', () => {});
-                navigator.serviceWorker.register('sw.js').then(registration => {
+                navigator.serviceWorker.register('./sw.js').then(registration => {
                     console.log('SW registered: ', registration);
                 }).catch(registrationError => {
-                    console.log('SW registration failed (Expected if sw.js is missing): ', registrationError);
+                    console.log('SW registration failed: ', registrationError);
                 });
             });
         }
