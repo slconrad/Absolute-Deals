@@ -455,11 +455,15 @@
             <p>Secure AbsoluteDeals.com for your portfolio. Serious inquiries only.</p>
             
             <div class="cta-group">
-                <a href="mailto:inquire@absolutedeals.com?subject=Offer for AbsoluteDeals.com" class="btn btn-primary">
+                <a id="contact-link" class="btn btn-primary">
+                Email us about AbsoluteDeals.com
+                </a>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     Contact Broker
                 </a>
-                <a href="mailto:inquire@absolutedeals.com?subject=Offer for AbsoluteDeals.com" class="btn btn-outline">
+                <a id="contact-link" class="btn btn-outline">
+                Email us about AbsoluteDeals.com
+                </a>
                     Make an Offer
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
@@ -475,7 +479,29 @@
             </div>
         </div>
     </footer>
+    <script>
+  (function () {
+    var user = "inquire";
+    var domain = "absolutedeals";
+    var tld = "com";
+    var subject = "Offer for AbsoluteDeals.com";
 
+    var email = user + "@" + domain + "." + tld;
+    var href =
+      "mailto:" +
+      email +
+      "?subject=" +
+      encodeURIComponent(subject);
+
+    var link = document.getElementById("contact-link");
+
+    if (link) {
+      link.setAttribute("href", href);
+      // If you want to display the actual email instead of text, uncomment:
+      // link.textContent = email;
+    }
+  })();
+</script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
